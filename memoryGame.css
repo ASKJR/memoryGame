@@ -1,0 +1,4 @@
+/* add a little bottom space under the images */
+.thumbnail {
+	margin-bottom:7px;
+}
