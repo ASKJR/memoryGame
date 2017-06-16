@@ -7,26 +7,45 @@
   		for (var i = 0 ; i < $(this).val() ; i++) {
   			photo = photos[i];
   			gridCell += '<div class="col-lg-2 col-sm-3 col-xs-4">' 
-  						+'<div class="fakePhoto">'+
-
-             				'<img src=""  id="hi" class="thumbnail">'
+  						+'<div>'+
+             				'<img src="http://thecraftchop.com/files/others/Pokeball.svg" class="thumbnail" onclick="pickCard(this);"> '
         				+'</div>' 
   				
-  			        	+'<div class="lala" >'+
+  			        	+'<div class="frontCard" >'+
              				'<img src="'+ photo +'"  class="thumbnail">'
         				+'</div>' 	
    	 			+'</div>';
   		}
   		$('#memoryGameGrid').html(gridCell);
-  		$(".lala").hide();
-
+  		$(".frontCard").hide();
 	});
 
-	$(".fakePhoto").click(function() {
-
-  		console.log('Olá');
-	});
 });
+
+
+/*****************************GAME LOGIC*****************************/
+function pickCard(card)
+{
+	var backCard  = $(card).parent();
+	var frontCard = backCard.next();
+
+	cardHide(backCard);
+	cardShow(frontCard);
+}
+
+function cardHide(card)
+{
+	card.hide();
+}
+
+function cardShow(card)
+{
+	card.show();
+}
+
+
+
+/**************************BUILD GAME BOARD (GRID)*******************/
 
 function getPhotos()
 {
