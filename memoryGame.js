@@ -1,23 +1,8 @@
  $(function(){
 
     $( "#selectCardQuantity" ).change(function() {
-  		var gridCell  = '';
-  		var photos = selectedPhotosForGrid($(this).val()),photo;
-
-  		for (var i = 0 ; i < $(this).val() ; i++) {
-  			photo = photos[i];
-  			gridCell += '<div class="col-lg-2 col-sm-3 col-xs-4">' 
-  						+'<div>'+
-             				'<img src="http://thecraftchop.com/files/others/Pokeball.svg" class="thumbnail" onclick="pickCard(this);"> '
-        				+'</div>' 
-  				
-  			        	+'<div class="frontCard" >'+
-             				'<img src="'+ photo +'"  class="thumbnail">'
-        				+'</div>' 	
-   	 			+'</div>';
-  		}
-  		$('#memoryGameGrid').html(gridCell);
-  		$(".frontCard").hide();
+		var numberOfCards = $(this).val();
+		memoryGameInit(numberOfCards);
 	});
 
 });
@@ -43,11 +28,47 @@ function cardShow(card)
 	card.show();
 }
 
+function hideAllFrontCards()
+{
+	$(".frontCard").hide();
+}
+
 
 
 /**************************BUILD GAME BOARD (GRID)*******************/
 
-function getPhotos()
+function memoryGameInit(numberOfCards)
+{
+  	var frontCardsImgs = selectedImgsForGrid(numberOfCards);
+  	var backCardImg    = getCardBackImg();
+  	var grid           = buildGrid(numberOfCards,frontCardsImgs,backCardImg);
+
+  	$('#memoryGameGrid').html(grid);
+  	hideAllFrontCards();
+}
+
+function buildGrid(numberOfCards,frontCardsImgs,backCardImg)
+{
+	var grid = '';
+	var frontCardImg;
+	for (var i = 0 ; i < numberOfCards ; i++) {
+  		frontCardImg = frontCardsImgs[i];
+  		grid += '<div class="col-lg-2 col-sm-3 col-xs-4">' 
+  						+'<div>'+
+             				'<img src="'+ backCardImg +'" class="thumbnail" onclick="pickCard(this);"> '
+        				+'</div>' 
+  				
+  			        	+'<div class="frontCard" >'+
+             				'<img src="'+ frontCardImg +'"  class="thumbnail">'
+        				+'</div>' 	
+   	 			+'</div>';
+  	}
+
+  	return grid;
+}
+
+
+function getCardsFrontImgs()
 {
  	var pokemons = [
 
@@ -80,10 +101,15 @@ function getPhotos()
  	return pokemons;
 }
 
-function selectedPhotosForGrid(numberOfCards)
+function getCardBackImg()
+{
+	return "http://thecraftchop.com/files/others/Pokeball.svg";
+}
+
+function selectedImgsForGrid(numberOfCards)
 {
 	var cards = numberOfCards/2;
-	var photos = getPhotos();
+	var photos = getCardsFrontImgs();
 	var selectedPhotos = [];
 	var i;
 
@@ -94,8 +120,6 @@ function selectedPhotosForGrid(numberOfCards)
 	}
 
 	shuffle(selectedPhotos);
-
-	//console.log(selectedPhotos);
 
 	return selectedPhotos;
 }
