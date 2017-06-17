@@ -4,6 +4,8 @@
 		<meta charset="utf-8">
    		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>TheMemoryGame</title>
+    	<link rel="shortcut icon" href="img/brain.png" />
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<!-- Optional theme -->
@@ -20,20 +22,39 @@
 	</head>
 	<body>
 		<div class="container">
-			<h2>MemoryGame</h2>
-			Qtd de cartas: 
-			<select id="selectCardQuantity">
-				<option></option>
-				<option value="6">6</option>
-				<option value="12">12</option>
-				<option value="24">24</option>
-				<option value="48">48</option>	
-			</select>
+			<br>
+			<div class="row text-center">
+				<div class="col-md-12">
+					<img src="img/brain2.png">
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="col-md-12">
+					<h2>The Memory Game</h2>
+				</div>
+			</div>
+			<hr>
+
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="lblNumOfCards">Number of Cards - Difficulty:</label>
+						<select id="selectCardQuantity" class="form-control">
+							<option></option>
+							<option value="6">6 - Super Super Easy</option>
+							<option value="12">12 - Super Easy</option>
+							<option value="24">24 - Easy</option>
+							<option value="48">48 - Normal</option>
+							<option value="96">96 - Medium</option>
+							<option value="192">192 - Hard</option>	
+							<option value="302">302 - Einstein</option>
+						</select>
+					</div>
+				</div>
+			</div>
 			<br><br>
   			<!--grid-->
-  			<div class="row" id="memoryGameGrid">
-  			
-    			
+  			<div class="row" id="memoryGameGrid">	
   			</div>
   			<!--EndGrid-->
   			<hr>
