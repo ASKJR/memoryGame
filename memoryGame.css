@@ -3,7 +3,13 @@
 	margin-bottom:7px;
 }
 
-img {
+.cardImg {
     height: 145px;
     width:  155px;
+}
+.numberOfPairs {
+	color: #FF0000;
+}
+.numberOfMatchedPairs {
+	color:#008000;
 }

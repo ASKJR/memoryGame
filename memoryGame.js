@@ -27,6 +27,7 @@ function pickCard(backcard)
 
 	if (activeCards.length == 2) {
 		checkCardsCompability(activeCards);
+		incrementNumberOfTries();
 	}
 }
 
@@ -45,7 +46,9 @@ function checkCardsCompability(pairOfCards)
 	
 	//pair of cards match
 	if (frontCard1.attr('name') === frontCard2.attr('name')) {
+		incrementNumberOfMatchedPairs();
 		cardsAreCompatibleMsg();
+		decrementNumberOfPairs();
 	}
 	//pair of cards don't match
 	else {
@@ -90,6 +93,64 @@ function hideAllFrontCards()
 	$(".frontCard").hide();
 }
 
+/**
+ * incrementNumberOfTries
+ * @return {Void}                  
+ */
+function incrementNumberOfTries()
+{
+	var numberOfTries = Number($('#numberOfTries').text());
+	numberOfTries++;
+	$('#numberOfTries').text(numberOfTries);	
+}
+
+/**
+ * incrementNumberOfMatchedPairs
+ * @return {Void}
+ */
+function incrementNumberOfMatchedPairs()
+{
+	var numberOfMatchedPairs = Number($('#numberOfMatchedPairs').text());
+	numberOfMatchedPairs++;
+	$('#numberOfMatchedPairs').text(numberOfMatchedPairs);	
+}
+
+/**
+ * decrementNumberOfPairs
+ * @return {Void}
+ */
+function decrementNumberOfPairs()
+{
+	var numberOfPairs = Number($('#numberOfPairs').text());
+	numberOfPairs--;
+	$('#numberOfPairs').text(numberOfPairs);		
+}
+
+/**
+ * initializeNumberOfTries
+ * @return {Void}
+ */
+function initializeNumberOfTries()
+{
+	$('#numberOfTries').text('0');
+}
+/**
+ * initializeNumberOfMatchedPairs
+ * @return {Void}
+ */
+function initializeNumberOfMatchedPairs()
+{
+	$('#numberOfMatchedPairs').text('0');
+}
+
+/**
+ * initializeNumberOfPairs
+ * @return {Void}
+ */
+function initializeNumberOfPairs(numberOfCards)
+{
+	$('#numberOfPairs').text(numberOfCards/2);
+}
 /*************************GAME MESSAGES******************************/
 /**
  * cardsAreCompatibleMsg
@@ -120,7 +181,12 @@ function memoryGameInit(numberOfCards)
   	var frontCardsImgs = selectedImgsForGrid(numberOfCards);
   	var backCardImg    = getBackCardImg();
   	var grid           = buildGrid(numberOfCards,frontCardsImgs,backCardImg);
+  	
+  	initializeNumberOfTries();
+  	initializeNumberOfMatchedPairs();
+  	initializeNumberOfPairs(numberOfCards);
 
+  	
   	$('#memoryGameGrid').html(grid);
   	hideAllFrontCards();
 }
@@ -140,11 +206,11 @@ function buildGrid(numberOfCards,frontCardsImgs,backCardImg)
   		frontCardImg = frontCardsImgs[i];
   		grid += '<div class="col-lg-2 col-sm-3 col-xs-4">' 
   						+'<div class="backCard">'+
-             				'<img src="'+ backCardImg +'" class="thumbnail" onclick="pickCard(this);"> '
+             				'<img src="'+ backCardImg +'" class="thumbnail cardImg" onclick="pickCard(this);"> '
         				+'</div>' 
   				
   			        	+'<div class="frontCard" name="'+ frontCardImg  +'" >'+
-             				'<img src="'+ frontCardImg +'"  class="thumbnail">'
+             				'<img src="'+ frontCardImg +'"  class="thumbnail cardImg">'
         				+'</div>' 	
    	 			+'</div>';
   	}
