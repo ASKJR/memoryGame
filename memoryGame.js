@@ -49,18 +49,22 @@ function checkCardsCompability(pairOfCards)
 		incrementNumberOfMatchedPairs();
 		cardsAreCompatibleMsg();
 		decrementNumberOfPairs();
+		if (hasUserWon()) {
+			userWonMsg();
+		}
+
 	}
 	//pair of cards don't match
 	else {
 		setTimeout(function() {
 			backCard1 = frontCard1.prev();
 			backCard2 = frontCard2.prev();
+			cardsAreNotCompatibleMsg();
 			cardHide(frontCard1);
 			cardHide(frontCard2);
 			cardShow(backCard1);
 			cardShow(backCard2);
-			cardsAreNotCompatibleMsg();
-		}, 2000);
+		}, 1);
 	}
 }
 
@@ -151,6 +155,27 @@ function initializeNumberOfPairs(numberOfCards)
 {
 	$('#numberOfPairs').text(numberOfCards/2);
 }
+
+/**
+ * getNumberOfHiddenPairs
+ * @return {Int}
+ */
+function getNumberOfHiddenPairs()
+{
+	return Number($('#numberOfPairs').text());	
+}
+
+/**
+ * hasUserWon
+ * @return {Boolean}
+ */
+function hasUserWon()
+{
+	if (getNumberOfHiddenPairs()===0) {
+		return true;
+	}
+	return false;
+}
 /*************************GAME MESSAGES******************************/
 /**
  * cardsAreCompatibleMsg
@@ -168,6 +193,19 @@ function cardsAreCompatibleMsg()
 function cardsAreNotCompatibleMsg()
 {
 	alert("Whoops. Unfortunately, the pair of cards don't match. Try again!");	
+}
+
+/**
+ * userWonMsg
+ * @return {Void}
+ */
+function userWonMsg()
+{
+	swal({
+  		title: "You win. :)",
+  		text: "Congratulations! You got them all.",
+  		imageUrl: "http://satoshipedia.altervista.org/wp-content/uploads/2014/08/Orange-League-Champion.png"
+	});
 }
 
 /**************************BUILD GAME BOARD (GRID)*******************/
