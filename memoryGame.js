@@ -204,7 +204,7 @@ function userWonMsg()
 	swal({
   		title: "You win. :)",
   		text: "Congratulations! You got them all.",
-  		imageUrl: "http://satoshipedia.altervista.org/wp-content/uploads/2014/08/Orange-League-Champion.png"
+  		imageUrl: "https://image.redbull.com/rbcom/010/2014-08-14/1331671338718_2/0010/1/800/533/1/pokemon-world-championships-trophy.jpg"
 	});
 }
 
