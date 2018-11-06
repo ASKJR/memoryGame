@@ -26,7 +26,7 @@ function pickCard(backcard)
 	cardShow(frontCard);
 
 	if (activeCards.length == 2) {
-		checkCardsCompability(activeCards);
+		setTimeout(function() { checkCardsCompability(activeCards);}, 2000);
 		incrementNumberOfTries();
 	}
 }
@@ -242,7 +242,7 @@ function buildGrid(numberOfCards,frontCardsImgs,backCardImg)
 	var frontCardImg;
 	for (var i = 0 ; i < numberOfCards ; i++) {
   		frontCardImg = frontCardsImgs[i];
-  		grid += '<div class="col-lg-2 col-sm-3 col-xs-4">' 
+  		grid += '<div class="col-md-2 col-sm-4 col-xs-6">' 
   						+'<div class="backCard">'+
              				'<img src="'+ backCardImg +'" class="thumbnail cardImg" onclick="pickCard(this);"> '
         				+'</div>' 
