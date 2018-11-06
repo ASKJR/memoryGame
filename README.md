@@ -3,6 +3,6 @@
 
 ## Live on heroku:
 
-https://pok-memory.herokuapp.com/memoryGame.html
+https://pok-memory.herokuapp.com
 
 *Practice of JavaScript, HTML and CSS.
