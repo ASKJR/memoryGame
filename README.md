@@ -1,5 +1,8 @@
-# memoryGame
+## memoryGame
+![alt text](https://raw.githubusercontent.com/ASKJR/memoryGame/master/memoryGame.png)
 
-*Practice of JavaScript.
+## Live on heroku:
 
-Written By: Alberto Kato.
+https://pok-memory.herokuapp.com/memoryGame.html
+
+*Practice of JavaScript, HTML and CSS.
