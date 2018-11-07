@@ -9,23 +9,29 @@
 
 /*****************************GAME LOGIC*****************************/
 
+var facedUpCards = 0;
 /**
  * pickCard: show frontCard and hide backCard, in case two frontCards active, call checkCardsCompability. 
  * @param  {Img} backcard
  * @return {Void}      
  */
 function pickCard(backcard)
-{
+{	
+	facedUpCards++;
 	var backCard  = $(backcard).parent();
 	var frontCard = backCard.next();
-
-	frontCard.addClass('active');
 	var activeCards = $('.active');
+	
+	if (activeCards.length < 2) {
+		frontCard.addClass('active');
+		cardHide(backCard);
+		cardShow(frontCard);
 
-	cardHide(backCard);
-	cardShow(frontCard);
+	}
 
-	if (activeCards.length == 2) {
+	activeCards = $('.active');
+
+	if (activeCards.length == 2 && facedUpCards == 2) {
 		setTimeout(function() { checkCardsCompability(activeCards);}, 2000);
 		incrementNumberOfTries();
 	}
@@ -66,6 +72,7 @@ function checkCardsCompability(pairOfCards)
 			cardShow(backCard2);
 		}, 1);
 	}
+	facedUpCards = 0;
 }
 
 /**
@@ -426,7 +433,7 @@ function getFrontCardsImgs()
  */
 function getBackCardImg()
 {
-	return "http://thecraftchop.com/files/others/Pokeball.svg";
+	return "images/Pokeball.svg";
 }
 
 /**
