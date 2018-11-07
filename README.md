@@ -1,5 +1,5 @@
 ## memoryGame
-![alt text](https://raw.githubusercontent.com/ASKJR/memoryGame/master/memoryGame.png)
+![Alt text](images/memoryGame.png "Title")
 
 ## Live on heroku:
 
