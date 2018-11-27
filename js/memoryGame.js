@@ -7,9 +7,13 @@
 });
 
 
-/*****************************GAME LOGIC*****************************/
 
-var facedUpCards = 0;
+
+/*****************************GLOBAL VARIABLES***********************/
+var facedUpCards = 0, userName = '', 
+	startTime = null, endTime = null;
+
+/*****************************GAME LOGIC*****************************/
 /**
  * pickCard: show frontCard and hide backCard, in case two frontCards active, call checkCardsCompability. 
  * @param  {Img} backcard
@@ -56,7 +60,9 @@ function checkCardsCompability(pairOfCards)
 		cardsAreCompatibleMsg();
 		decrementNumberOfPairs();
 		if (hasUserWon()) {
+			stopTimer();
 			userWonMsg();
+			$('#rankingDiv').show();
 		}
 
 	}
@@ -178,12 +184,85 @@ function getNumberOfHiddenPairs()
  */
 function hasUserWon()
 {
-	if (getNumberOfHiddenPairs()===0) {
-		return true;
-	}
-	return false;
+	return getNumberOfHiddenPairs() === 0;
 }
-/*************************GAME MESSAGES******************************/
+
+/**
+ * getUserScoreData
+ *
+ * @return  {Object}
+ */
+function getUserScoreData()
+{
+	return {
+		name: userName,
+		difficulty: $( "#selectCardQuantity option:selected" ).text(),
+		tries: parseInt($('#numberOfTries').text()),
+		timing: getUserTimer(endTime-startTime)
+	}
+}
+/*************************TIMER**************************************/
+
+
+/**
+ * startTimer : set Initial gaming time
+ *
+ * @return  {Void}
+ */
+function startTimer()
+{
+	startTime = getTimer();
+}
+
+/**
+ * stopTimer : set game final time (When user beats the game). 
+ *
+ * @return  {Void}
+ */
+function stopTimer()
+{
+	endTime = getTimer();
+}
+
+/**
+ * getTimer return timing in milliseconds.
+ *
+ * @return  {DOMHighResTimeStamp}
+ */
+function getTimer()
+{
+	return performance.now();
+}
+
+/**
+ * getUserTimer 
+ * source: https://stackoverflow.com/questions/19700283/how-to-convert-time-milliseconds-to-hours-min-sec-format-in-javascript
+ *
+ * @param   {int}  millisec 
+ *
+ * @return  {timestamp}
+ */
+function getUserTimer(millisec) {
+
+	var seconds = (millisec / 1000).toFixed(0);
+	var minutes = Math.floor(seconds / 60);
+	var hours = "";
+	if (minutes > 59) {
+		hours = Math.floor(minutes / 60);
+		hours = (hours >= 10) ? hours : "0" + hours;
+		minutes = minutes - (hours * 60);
+		minutes = (minutes >= 10) ? minutes : "0" + minutes;
+	}
+
+	seconds = Math.floor(seconds % 60);
+	seconds = (seconds >= 10) ? seconds : "0" + seconds;
+	if (hours != "") {
+		return hours + ":" + minutes + ":" + seconds;
+	}
+	return minutes + ":" + seconds;
+}
+
+/*************************MESSAGES AND SAVE RECORD********************/
 /**
  * cardsAreCompatibleMsg
  * @return {Void}
@@ -212,6 +291,33 @@ function userWonMsg()
   		title: "You win. :)",
   		text: "Congratulations! You got them all.",
   		imageUrl: "https://image.redbull.com/rbcom/010/2014-08-14/1331671338718_2/0010/1/800/533/1/pokemon-world-championships-trophy.jpg"
+	}).then(()=> {
+		saveRecord();
+	})
+}
+
+/**
+ * savingRecord
+ *
+ * @return  {Void}
+ */
+function saveRecord()
+{
+	swal({
+		title: "Type you nickname to save your record.",
+		input: "text",
+		inputValidator: (value) => {
+			if (!value) {
+				return !value && 'You need to write something!';
+			}
+			if (value.length > 25) {
+				return value.length > 25 && 'Max of 25 characters are allowed for nicknames.';
+			}
+		}
+  	}).then((data) => {
+		//setting global userName variable
+		userName = data.value;
+		saveScore(getUserScoreData());
 	});
 }
 
@@ -231,9 +337,10 @@ function memoryGameInit(numberOfCards)
   	initializeNumberOfMatchedPairs();
   	initializeNumberOfPairs(numberOfCards);
 
-  	
+	$('#rankingDiv').hide();
   	$('#memoryGameGrid').html(grid);
-  	hideAllFrontCards();
+	hideAllFrontCards();
+	startTimer();  
 }
 
 /**
