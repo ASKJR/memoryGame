@@ -62,7 +62,6 @@ function checkCardsCompability(pairOfCards)
 		if (hasUserWon()) {
 			stopTimer();
 			userWonMsg();
-			$('#rankingDiv').show();
 		}
 
 	}
@@ -336,8 +335,12 @@ function memoryGameInit(numberOfCards)
   	initializeNumberOfTries();
   	initializeNumberOfMatchedPairs();
   	initializeNumberOfPairs(numberOfCards);
-
-	$('#rankingDiv').hide();
+	if (numberOfCards) {
+		$('#rankingDiv').show();
+	}
+	else {
+		$('#rankingDiv').hide();
+	}
   	$('#memoryGameGrid').html(grid);
 	hideAllFrontCards();
 	startTimer();  
