@@ -2,100 +2,100 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gotta catch 'Em All</title>
-	<link rel="shortcut icon" href="https://png.icons8.com/pokeball/color/48" />
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	 crossorigin="anonymous">
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	 crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gotta catch 'Em All</title>
+    <link rel="shortcut icon" href="https://png.icons8.com/pokeball/color/48" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
 
-	<link rel="stylesheet" type="text/css" href="css/memoryGame.css">
+    <link rel="stylesheet" type="text/css" href="css/memoryGame.css">
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-	 crossorigin="anonymous"></script>
-	<!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	 crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
-	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-	<script src="js/db.js"></script>
-	<script src="js/memoryGame.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="js/sweetAlert2.js"></script>
+    <link rel="stylesheet" href="css/sweetAlert2.css">
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/memoryGame.js"></script>
 
 </head>
 
 <body>
-	<div class="container">
-		<br>
-		<div class="row text-center">
-			<div class="col-md-12">
-				<img src="images/logo.png">
-			</div>
-		</div>
-		<div class="row text-center">
-			<div class="col-md-12">
-				<h2 class="gameTitle">The Memory Game</h2>
-			</div>
-		</div>
+    <div class="container">
+        <br>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <img src="images/logo.png">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h2 class="gameTitle">The Memory Game</h2>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group">
-					<label for="lblNumOfCards">Number of Cards - Difficulty:</label>
-					<select id="selectCardQuantity" class="form-control">
-						<option></option>
-						<option value="6">6 - Super Super Easy</option>
-						<option value="12">12 - Super Easy</option>
-						<option value="24">24 - Easy</option>
-						<option value="48">48 - Normal</option>
-						<option value="96">96 - Medium</option>
-						<option value="192">192 - Hard</option>
-						<option value="302">302 - Einstein</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>Attempts to catch: <span id="numberOfTries"></span></label>
-				</div>
-				<div class="form-group">
-					<label>Captured pokemons: <span id="numberOfMatchedPairs" class="numberOfMatchedPairs"></span></label>
-				</div>
-				<div class="form-group">
-					<label>Remaining pokemons: <span id="numberOfPairs" class="numberOfPairs"></span></label>
-				</div>
-			</div>
-			<div class="col-md-1">
-				<div class="form-group" style="display:none" id="rankingDiv">
-					<label for="lblNumOfCards">Raking:</label>
-					<a href="#" class="btn btn-sm form-control" style="background-color: #2A75BB; color: #ffffff" onclick="getScores()"><span
-						 class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>&nbsp;Show</a>
-				</div>
-			</div>
-		</div>
-		<br><br>
-		<!--grid-->
-		<div class="row" id="memoryGameGrid">
-		</div>
-		<!--EndGrid-->
-		<br>
-		<!--Footer-->
-		<div class="row">
-			<div class="col-md-3">
-				<b>Developed by:</b> Alberto Kato
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<b>E-mail:</b> albertokatojr@gmail.com
-			</div>
-		</div>
-		<!--EndFooter-->
-	</div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="lblNumOfCards">Number of Cards - Difficulty:</label>
+                    <select id="selectCardQuantity" class="form-control">
+                        <option></option>
+                        <option value="6">6 - Super Super Easy</option>
+                        <option value="12">12 - Super Easy</option>
+                        <option value="24">24 - Easy</option>
+                        <option value="48">48 - Normal</option>
+                        <option value="96">96 - Medium</option>
+                        <option value="192">192 - Hard</option>
+                        <option value="302">302 - Einstein</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Attempts to catch: <span id="numberOfTries"></span></label>
+                </div>
+                <div class="form-group">
+                    <label>Captured pokemons: <span id="numberOfMatchedPairs" class="numberOfMatchedPairs"></span></label>
+                </div>
+                <div class="form-group">
+                    <label>Remaining pokemons: <span id="numberOfPairs" class="numberOfPairs"></span></label>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group" style="display:none" id="rankingDiv">
+                    <label for="lblNumOfCards">Raking:</label>
+                    <a href="#" class="btn btn-sm form-control" style="background-color: #2A75BB; color: #ffffff"
+                        onclick="getScores()"><span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>&nbsp;Show</a>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <!--grid-->
+        <div class="row" id="memoryGameGrid">
+        </div>
+        <!--EndGrid-->
+        <br>
+        <!--Footer-->
+        <div class="row">
+            <div class="col-md-3">
+                <b>Developed by:</b> Alberto Kato
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <b>E-mail:</b> albertokatojr@gmail.com
+            </div>
+        </div>
+        <!--EndFooter-->
+    </div>
 
 </body>
 
