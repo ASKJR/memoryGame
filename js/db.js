@@ -56,7 +56,7 @@ function getScores()
 
 		html += "</table>";
 
-		swal({
+		Swal.fire({
 			imageUrl: 'images/ranking.png',
 			imageAlt: 'ranking image',
 			animation: false,
