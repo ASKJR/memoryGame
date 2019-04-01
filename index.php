@@ -1,1 +1,2 @@
-<?php header( 'Location: /memoryGame.html' ) ;  ?>
+<?php header('Location: /index.html');
+ 
