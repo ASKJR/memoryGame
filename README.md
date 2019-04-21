@@ -3,6 +3,6 @@
 
 ## Live on heroku:
 
-https://pok-memory.herokuapp.com
+http://pokemon.albertokato.com.br/
 
 *Practice of JavaScript, HTML and CSS.
