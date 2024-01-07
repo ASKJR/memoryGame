@@ -1,8 +1,9 @@
 ## memoryGame
+
 ![Alt text](images/memoryGame.png "Title")
 
-## Live on heroku:
+## Live:
 
-http://pokemon.albertokato.com.br/
+http://pokemon.albertokato.com/
 
-*Practice of JavaScript, HTML and CSS.
+Practice of JavaScript, HTML and CSS.

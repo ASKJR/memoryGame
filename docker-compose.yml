@@ -4,7 +4,7 @@ services:
     image: nginx:stable-alpine
     container_name: web.pokemon
     environment:
-      - VIRTUAL_HOST=pokemon.albertokato.com.br
+      - VIRTUAL_HOST=pokemon.albertokato.com
     expose:
       - "80"
     volumes:
